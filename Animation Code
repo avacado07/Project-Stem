@@ -1,0 +1,84 @@
+import simplegui
+import random
+
+global x
+global y
+global z
+
+x = - 50
+y = - 100
+z = -50
+# Create Global Variable
+
+def draw_handler(canvas):
+    # Animation Name: Reach Your Goals
+    global x
+    global y
+    global z
+
+    x = x + 5
+    y = y + 2
+    z = z + 3
+
+    # sun
+    canvas.draw_circle((300,400), 200, 5, "yellow", "yellow")
+
+    #road + text
+    canvas.draw_polygon([(0,500), (0,600), (600,600), (600,500)], 10, "darkgrey", "darkgrey")
+    canvas.draw_text("Just Keep Driving", (150, 300), 40, "red")
+    canvas.draw_text("To Reach Your Goals",  (150, 350), 40, "red")
+    canvas.draw_polygon([(500, 300,), (600, 300), (600, 400), (500, 400)], 5, "grey", "grey")
+        #smog 
+    if x < 150:
+        canvas.draw_polygon([(x - 25, 450), (x - 25, 500), (x + 25, 475)], 5, "#36454F", "#36454F")
+
+    # for loop to repeat lines on road 
+    for i in range(0, 600, 50):
+        canvas.draw_line((i, 550), (i + 25, 550), 5, "yellow")
+
+    # for loop to repeat track rails
+    for i in range(0, 600, 50):
+        canvas.draw_line((i + 5, 500), (i + 5, 400),5, "grey" )
+    canvas.draw_line((0,400), (600,400), 5, "grey")
+
+    #car body
+    canvas.draw_polygon([(x - 10, 450), (x - 10, 500), (x + 100,500), (x + 100, 450)], 10, "red", "red")
+    canvas.draw_polygon([(x + 100, 450), (x + 100, 500), (x + 150, 500)], 10, "red", "red")
+    canvas.draw_polygon([(x + 15, 425), (x + 15, 450), (x + 100,450), (x + 100, 425)], 10, "red", "red")
+    canvas.draw_polygon([(x + 75, 425), (x + 75, 450), (x + 100, 450), (x + 100, 425)], 10,"blue", "blue")
+
+    #car wheels 
+    canvas.draw_circle((x + 20, 500), 25, 10, "black", "black")
+    canvas.draw_circle((x + 100, 500), 25, 10, "black","black")
+    canvas.draw_circle((x + 20, 500), 15, 10, "grey", "grey")
+    canvas.draw_circle((x + 100, 500), 15, 10, "grey", "grey")
+
+       #clouds 
+    canvas.draw_circle((600 - z, 125), 25, 10, "white", "white")
+    canvas.draw_circle((550 - z, 100), 25, 10, "white", "white")
+    canvas.draw_circle((500 - z, 125), 25, 10, "white", "white")
+    canvas.draw_circle((550 - z, 125), 25, 10, "white", "white")
+
+    #win text
+    if x > 500:
+        canvas.draw_text("Win", (x, 400), 50,"white")
+
+    #man body
+    canvas.draw_line((1200 - y, 450), (1200 - y, 500), 5, "black")
+    canvas.draw_line((1200 - y, 450), (1175 - y, 495), 5, "black")
+    canvas.draw_line((1200 - y, 450), (1225 - y, 495), 5, "black")
+    canvas.draw_line((1200 - y, 500), (1175 - y, 525), 5, "black")
+    canvas.draw_line((1200 - y, 500), (1225 - y, 525), 5, "black")
+    canvas.draw_circle((1200 - y, 450), 15, 5, "#D2B48C", "#D2B48C")
+    canvas.draw_circle((1190 - y, 445), 2, 1, "black", "black")
+    canvas.draw_circle((1210 - y, 445), 2, 1, "black", "black")
+    canvas.draw_circle((1200 - y, 455), 5, 1, "black", "black")
+
+    #trophy appears at y = 300
+    if 1200 - y < 300:
+        canvas.draw_polygon([(1220 - y, 480), (1230 -y, 480), (1225 - y, 495)], 5, "#FFDF00", "#FFDF00")
+        canvas.draw_polygon([(1225 - y, 495), (1220 - y, 500), (1230 - y, 500)], 5, "#FFDF00", "#FFDF00") 
+
+    #smile appears at y = 150
+    if 1200 - y < 150:
+        canvas.draw_polygon([(1200 - y, 445), (1190 - y, 455), (1210 - y, 455)], 1, "#D2B48C", "#D2B48C")
